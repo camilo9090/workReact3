@@ -6,7 +6,7 @@ import useOrder from "./hooks/useOrder";
 import TipPercentageForm from "./components/TipPercentageForm";
 
 function App() {
-  const { order, addItem, deleteItem,setTip,tip } = useOrder()
+  const { order, addItem, deleteItem, setTip, tip, placeOrder } = useOrder()
 
 
   return (
@@ -32,20 +32,30 @@ function App() {
         </div>
         <div className="border border-dashed border-slate-300 p-5 rounded-lg space-y-10">
 
+          {order.length > 0 ? (
 
-          <OrderContents
+            <>
+              <OrderContents
 
-            order={order}
-            deleteItem={deleteItem}
-          />
-          <TipPercentageForm 
-          setTip={setTip}
-          
-          />
-          <OrderTotals
-            order={order}
-            tip={tip}
-          />
+                order={order}
+                deleteItem={deleteItem}
+              />
+              <TipPercentageForm
+                setTip={setTip}
+                tip={tip}
+
+              />
+              <OrderTotals
+                order={order}
+                tip={tip}
+                placeOrder={placeOrder}
+              />
+            </>
+          ) : (
+
+            <p className="text-center">La orden esta vacia</p>
+          )}
+
         </div>
 
 
